@@ -13,11 +13,11 @@ app.use(express.json())
 const userRoutes = require("../routes/user.route")
 app.use("/users",userRoutes)
 
-// const productRoutes = require("../routes/products.route")
-// app.use("/products",productRoutes)
+const cityRoutes = require("../routes/cities.route")
+app.use("/city",cityRoutes)
 
-// const cartRoutes = require("../routes/cart.route")
-// app.use("/carts",cartRoutes)
+const hotelRoutes = require("../routes/hotels.route")
+app.use("/hotel",hotelRoutes)
 
 
 // const reviewRoutes = require("../routes/review.route")
