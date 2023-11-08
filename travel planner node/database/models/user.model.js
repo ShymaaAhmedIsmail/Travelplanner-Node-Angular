@@ -86,13 +86,24 @@ const userSchema = mongoose.Schema({
     timestamps : true  
 }
 )
+userSchema.virtual("booked", {
+    ref:"booked",
+    localField: "_id",
+    foreignField:"userId"
+})
+userSchema.virtual("review", {
+    ref:"review",
+    localField: "_id",
+    foreignField:"userId"
+})
+userSchema.virtual("fav", {
+    ref:"fav",
+    localField: "_id",
+    foreignField:"userId"
+})
 
 
-// userSchema.virtual("mycart", {
-//     ref:"cart",
-//     localField: "_id",
-//     foreignField:"userId"
-// })
+
 
 //make data unvisible
 userSchema.methods.toJSON = function(){

@@ -8,6 +8,8 @@ const router = require("express").Router()
 
 
 router.post("/addhotel",authUser,authAdmin,upload.array('images', 5) , hotelController.addhotel)
+router.get("/allhotels", hotelController.getAllHotels)
+
 
 
 

@@ -3,8 +3,6 @@ const cityModel = require("../../database/models/cities.model")
 const { resGenerator, fileHandler } = require("../helper")
 class city {
     static addcity = async (req, res) => {
-        
-        
         try {
            console.log("ana fe el try")
             const cityData = new cityModel (req.body)
@@ -40,6 +38,20 @@ class city {
             resGenerator(res, 500, false, e.message, "error in show data")
         }
     }
+
+    static addtrip = async (req, res) => {
+        try {
+           console.log("ana fe el try")
+            const tripData = new cityModel (req.body)
+            await tripData.save()
+            resGenerator(res, 200, true, tripData, "data added")
+        }
+        catch (e) {
+            console.log("ana fel catch")
+            resGenerator(res, 500, false, e.message, "error in insert")
+        }
+    }
+
 }
 
 module.exports = city

@@ -19,8 +19,19 @@ app.use("/city",cityRoutes)
 const hotelRoutes = require("../routes/hotels.route")
 app.use("/hotel",hotelRoutes)
 
+const tripRoutes = require("../routes/trip.route")
+app.use("/trip",tripRoutes)
 
-// const reviewRoutes = require("../routes/review.route")
-// app.use("/review",reviewRoutes)
+const travelRoutes = require("../routes/travel.route")
+app.use("/travel",travelRoutes)
+
+const bookedRoutes = require("../routes/booked.route")
+app.use("/booked",bookedRoutes)
+
+const reviewRoutes = require("../routes/review.route")
+app.use("/review",reviewRoutes)
+
+const favRoutes = require("../routes/fav.route")
+app.use("/fav",favRoutes)
 
 module.exports = app

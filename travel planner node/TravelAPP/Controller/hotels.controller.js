@@ -32,6 +32,16 @@ class hotel {
             resGenerator(res, 500, false, e.message, "error in insert")
         }
     }
+    static getAllHotels=async(req,res)=>{
+        try {
+            const hotels = await hotelmodel.find()
+           
+            resGenerator(res, 200, true, hotels, "data showed")
+        }
+        catch (e) {
+            resGenerator(res, 500, false, e.message, "error in show data")
+        }
+    }
 }
 
 module.exports = hotel

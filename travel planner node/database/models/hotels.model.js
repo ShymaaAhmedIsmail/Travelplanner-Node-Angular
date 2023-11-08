@@ -34,5 +34,11 @@ const hotelSchema = mongoose.Schema({
 
 })
 
+hotelSchema.virtual("myhotel", {
+    ref:"travel",
+    localField: "_id",
+    foreignField:"hotelid"
+})
+
 const hotelModel = new mongoose.model("hotel", hotelSchema)
 module.exports = hotelModel

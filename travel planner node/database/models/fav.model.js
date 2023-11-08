@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 const validator = require("validator")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
-const bookedSchema = mongoose.Schema({
+const favschema = mongoose.Schema({
     userId:{
         type: mongoose.Schema.Types.ObjectId,
         ref:"user", 
@@ -15,16 +15,14 @@ const bookedSchema = mongoose.Schema({
                 ref:"travel", 
                 required:true
             },
-            numberOfPerson:{
-                type:Number,
-                required:true
-            }
+           
           
         }
     ]
-       
     
-   })
 
-const bookedModel = new mongoose.model("booked", bookedSchema)
-module.exports = bookedModel
+})
+
+
+const favModel = new mongoose.model("fav", favschema)
+module.exports = favModel
