@@ -100,7 +100,19 @@ class User {
             resGenerator(res, 500, false, e.message, "error in show data")
         }
     }
- 
+    static getallemails = async(req,res) =>{
+        try {
+            const user = await userModel.find()
+            let emails=[]
+            user.forEach(element => {
+                emails.push(element.email)
+            });
+            resGenerator(res, 200, true, emails, "data showed")
+        }
+        catch (e) {
+            resGenerator(res, 500, false, e.message, "error in show data")
+        }
+    }
 
     
     // // static editProfile = async(req,res)=>{

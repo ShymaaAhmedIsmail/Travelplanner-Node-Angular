@@ -23,7 +23,7 @@ const userSchema = mongoose.Schema({
     },
     countryCode:{
         type:String,
-        required: true
+      
     },
     phone:{
         type:String,
@@ -37,7 +37,7 @@ const userSchema = mongoose.Schema({
     },
     password:{
         type:String,
-        required:true,
+        
         trim:true,
         // match: /^(?=.\d)(?=.[a-z])(?=.[A-Z])(?=.[a-zA-Z]).{8,}$/
         // match: /^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[@#%])[A-Za-z\d@#%]{8,}$/
@@ -76,6 +76,7 @@ const userSchema = mongoose.Schema({
         {
             token:{
                 type:String,
+                
                 required:true
             }
         }

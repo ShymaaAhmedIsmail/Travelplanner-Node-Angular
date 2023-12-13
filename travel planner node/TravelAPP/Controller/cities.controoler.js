@@ -51,6 +51,15 @@ class city {
             resGenerator(res, 500, false, e.message, "error in insert")
         }
     }
+    static deletecity=async(req,res)=>{
+        try{
+            await cityModel.findByIdAndDelete(req.params.id)
+            resGenerator(res, 200, true, null, "city deleted")
+        }
+        catch (e) {
+            resGenerator(res, 500, false, e.message, "error in delete")
+        }  
+    }
 
 }
 

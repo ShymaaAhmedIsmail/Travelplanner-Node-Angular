@@ -11,7 +11,13 @@ const citySchema = mongoose.Schema({
         maxLength: 20,
         trim: true
     },
-    loccationCity: {
+    
+    description: {
+        type: String,
+    
+        trim: true
+    },
+    locationCity: {
         type: String,
         trim: true
     },

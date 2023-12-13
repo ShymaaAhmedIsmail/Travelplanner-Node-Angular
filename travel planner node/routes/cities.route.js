@@ -13,7 +13,7 @@ router.post("/addcity",authUser,authAdmin, cityController.addcity)
 router.get("/citiesName",cityController.getcitesName)
 router.get("/allcitesdata",cityController.getcitesdata)
 
-
+router.delete("/deletecity/:id" ,authUser ,authAdmin  ,cityController.deletecity)
 
 
 module.exports = router
