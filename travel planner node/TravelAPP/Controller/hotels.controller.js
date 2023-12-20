@@ -8,28 +8,31 @@ const {
 class hotel {
     static addhotel = async (req, res) => {
         try {
-        
+
             // if (!req.files) {
             //     throw new Error(" add image ")
             //     // res.send("ana fe if ")
             // }
-            let imagesNames=[]
-            if (req.files){
+            let imagesNames = []
+            if (req.files) {
                 console.log(req.files.length)
                 req.files.forEach(element => {
-              const ext = element.originalname.split('.').pop() // jpeg
-               
-                const fileName = element.path + "." + ext
-    
-                fs.renameSync(element.path, fileName)
-                const  newName= fileName.replace("public", "")
-                imagesNames.push(newName)
-                
+                    const ext = element.originalname.split('.').pop() // jpeg
+
+                    const fileName = element.path + "." + ext
+
+                    fs.renameSync(element.path, fileName)
+                    const newName = fileName.replace("public", "")
+                    imagesNames.push(newName)
+
                 });
             }
-        
-          
-            const hotelobj = new hotelmodel({...req.body,images:imagesNames})
+
+
+            const hotelobj = new hotelmodel({
+                ...req.body,
+                images: imagesNames
+            })
             await hotelobj.save()
             resGenerator(res, 200, true, hotelobj, "data added")
 
@@ -37,36 +40,33 @@ class hotel {
             resGenerator(res, 500, false, e.message, "error in insert")
         }
     }
-    static getAllHotels=async(req,res)=>{
+    static getAllHotels = async (req, res) => {
         try {
             const hotels = await hotelmodel.find()
-           
+
             resGenerator(res, 200, true, hotels, "data showed")
-        }
-        catch (e) {
+        } catch (e) {
             resGenerator(res, 500, false, e.message, "error in show data")
         }
     }
 
-    static deletehotel=async(req,res)=>{
-        try{
+    static deletehotel = async (req, res) => {
+        try {
             await hotelmodel.findByIdAndDelete(req.params.id)
             resGenerator(res, 200, true, null, "hotel deleted")
-        }
-        catch (e) {
+        } catch (e) {
             resGenerator(res, 500, false, e.message, "error in delete")
-        }  
+        }
     }
-    static gethotelsNames = async(req,res) =>{
+    static gethotelsNames = async (req, res) => {
         try {
             const hotels = await hotelmodel.find()
-            let arrhotels=[]
+            let arrhotels = []
             hotels.forEach(element => {
-              arrhotels.push(element.Name)
+                arrhotels.push(element.Name)
             });
             resGenerator(res, 200, true, arrhotels, "data showed")
-        }
-        catch (e) {
+        } catch (e) {
             resGenerator(res, 500, false, e.message, "error in show data")
         }
     }
@@ -104,7 +104,14 @@ class hotel {
             resGenerator(res, 500, false, e.message, "error in update hotel")
         }
     }
-
+    static getspecifichotel = async (req, res) => {
+        try {
+           const hotel= await hotelmodel.findById(req.params.id)
+            resGenerator(res, 200, true, hotel, "hotel found")
+        } catch (e) {
+            resGenerator(res, 500, false, e.message, "error in found hotel")
+        }
+    }
 }
 
 module.exports = hotel

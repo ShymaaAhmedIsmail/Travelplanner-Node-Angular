@@ -99,6 +99,16 @@ class travel {
            }
     }
 
+    static gettravelById = async (req, res) => {
+        try {
+            const travelsbyid=await travelModel.findById(req.params._id)
+            resGenerator(res, 200, true, travelsbyid, "show sucessfully")
+
+        } catch (e) {
+            console.log("ana fel catch")
+            resGenerator(res, 500, false, e.message, "error in show")
+        }
+    }
 }
 
 module.exports = travel

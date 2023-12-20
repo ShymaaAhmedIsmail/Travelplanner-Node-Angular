@@ -14,6 +14,6 @@ router.delete("/deletehotel/:id" ,authUser ,authAdmin  ,hotelController.deleteho
 
 router.get("/hotelsName",hotelController.gethotelsNames)
 router.patch("/edithotel/:id",authUser,authAdmin,upload.array('images', 5) , hotelController.edithotel)
-
+router.get("/specifichotel/:id",hotelController.getspecifichotel)
 
 module.exports = router

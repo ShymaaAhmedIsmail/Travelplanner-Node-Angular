@@ -1,1 +1,105 @@
-<p>travels works!</p>
+<div class="container" *ngIf="travelboolen">
+    <h1 class="mt-2 ms-2">
+        All Travels
+    </h1>
+    <table class="table table-hover mt-5 text-center ">
+        <thead>
+            <th>
+                #
+            </th>
+            <th>
+                City Name
+            </th>
+            <th>
+                Hotel Name
+            </th>
+            <th>
+                Start Date
+            </th>
+            <th>
+                End Date
+            </th>
+            <th>
+                Action
+            </th>
+        </thead>
+        <tbody class="py-5">
+            <tr *ngFor="let t of travelsarr; let i=index " class="custom-padding" (click)="travelDetails(t.id)" >
+                <td>
+                    {{i+1}}
+                </td>
+                <td>
+                    {{t.cityname}}
+                </td>
+                <td>
+                    {{t.hotelname}}
+                </td>
+                <td>
+                    {{t.startdate|date:'dd/MM/yyyy'}}
+                </td>
+                <td>
+                    {{t.enddate|date:'dd/MM/yyyy'}}
+                </td>
+                <td (click)="deletetravel(i)">
+                    <i class="fa-regular fa-trash-can fa-lg fs-3" style="color:#044669;"></i>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+    <div class="d-flex justify-content-end me-5 mt-5">
+        <button type="button" class="btn add-btn text-white" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            data-bs-whatever="@mdo">Add New Travel</button>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add City</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="myForm" (ngSubmit)="addnewtravel()">
+
+                        <div class="mb-3">
+                            <label for="city-name" class="col-form-label">City Name:</label>
+                            <select class="form-control" id="city-name" name="cityname" formControlName="cityname">
+                                <option *ngFor="let city of citesNames" value="{{city}}">{{city}}
+                                </option>
+
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="hotel-name" class="col-form-label">Hotel Name:</label>
+                            <select class="form-control" id="hotel-name" name="hotelid" formControlName="hotelid">
+                                <option *ngFor="let hotel of hoteldata" value="{{hotel._id}}">{{hotel.Name}}
+                                </option>
+
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">start Date:</label>
+                            <input type="date" class="form-control" id="message-text" name="startDate"
+                                formControlName="startDate">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">end Date:</label>
+                            <input type="date" class="form-control" id="message-text" name="endDate"
+                                formControlName="endDate">
+                        </div>
+                        <div class="modal-footer">
+
+                            <button class="btn add-btn text-white">Add</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="container" *ngIf="!travelboolen" >
+    <i class="fa-solid fa-arrow-left fa-lg" (click)="travelDetails(0)"></i>
+<app-trip  [travelid]="travelid" ></app-trip>
+</div>

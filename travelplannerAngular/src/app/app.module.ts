@@ -25,7 +25,8 @@ import { TravelsComponent } from './adminpages/travels/travels.component';
 import { AddadminComponent } from './adminpages/addadmin/addadmin.component';
 import { InterceptorInterceptor } from './interceptor/interceptor.interceptor';
 import { GoogleMapsModule } from '@angular/google-maps';
-import { DashComponent } from './adminpages/dash/dash.component'
+import { DashComponent } from './adminpages/dash/dash.component';
+import { TripComponent } from './adminpages/trip/trip.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +41,8 @@ import { DashComponent } from './adminpages/dash/dash.component'
     HotelsComponent,
     TravelsComponent,
     AddadminComponent,
-    DashComponent
+    DashComponent,
+    TripComponent
   ],
   imports: [
     BrowserModule,

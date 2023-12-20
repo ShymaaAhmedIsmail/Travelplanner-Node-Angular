@@ -4,7 +4,7 @@
     </h1>
     <table class="table table-hover mt-5 text-center ">
         <thead>
-            <th >
+            <th>
                 #
             </th>
             <th>
@@ -17,98 +17,163 @@
                 Price Per Day
             </th>
             <th>
-               Images
+                Images
             </th>
             <th>
                 Action
             </th>
         </thead>
         <tbody class="py-5 ">
-            <tr *ngFor="let h of hotelsData; let i=index " class="custom-padding" >
+            <tr *ngFor="let h of hotelsData; let i=index " class="custom-padding">
                 <td>
                     {{i+1}}
-                 </td>
+                </td>
                 <td>
-                   {{ h.Name}}
+                    {{ h.Name}}
                 </td>
                 <td>
                     {{h.cityname}}
-                 </td>
-                 <td>
+                </td>
+                <td>
                     {{h.pricePerDay}}
-                 </td>
-                 <td class="w-25 " >
-                 
-                       <div [id]="'carouselExampleFade' + h._id" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                </td>
+                <td class="w-25 ">
+
+                    <div [id]="'carouselExampleFade' + h._id" class="carousel carousel-dark slide"
+                        data-bs-ride="carousel">
                         <div class="carousel-inner">
-                          <div class="carousel-item" *ngFor="let image of h.images; let i = index" [class.active]="i==0" >
-                            <img src="http://localhost:4000{{image}}" class="d-block w-50 h-10 mx-auto" alt="...">
-                          </div>
+                            <div class="carousel-item" *ngFor="let image of h.images; let i = index"
+                                [class.active]="i==0">
+                                <img src="http://localhost:4000{{image}}" class="d-block w-50 h-10 mx-auto" alt="...">
+                            </div>
                         </div>
-                        <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carouselExampleFade' + h._id" data-bs-slide="prev">
-                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                          <span class="visually-hidden">Previous</span>
+                        <button class="carousel-control-prev" type="button"
+                            [attr.data-bs-target]="'#carouselExampleFade' + h._id" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
                         </button>
-                        <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carouselExampleFade' + h._id" data-bs-slide="next">
-                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                          <span class="visually-hidden">Next</span>
+                        <button class="carousel-control-next" type="button"
+                            [attr.data-bs-target]="'#carouselExampleFade' + h._id" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
                         </button>
-                      </div>
-                    
-               
-                 </td>
-                 <td >
-                    <i class="fa-solid fa-pen-to-square fs-3" style="color: #044669;"></i>
-                 </td>
-                 <td (click)="deletehotel(i)">
+                    </div>
+
+
+                </td>
+                <td>
+                    <i class="fa-solid fa-pen-to-square fs-3" data-bs-toggle="modal" data-bs-target="#editModal"
+                        data-bs-whatever="@mdo" style="color: #044669;" (click)="oneditclick(h._id)"></i>
+
+                    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel2"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel2">Edit Hotel</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form #edithotel="ngForm" (ngSubmit)="editForm(edithotel)">
+                                        <div class="mb-3">
+                                            <label for="hotel-name" class="col-form-label">Hotel Name:</label>
+                                            <input type="text" class="form-control" id="hotel-name" name="Name"
+                                                [(ngModel)]="editModel.Name" #Name="ngModel" value=" {{h.Name}}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="city-name" class="col-form-label">City Name:</label>
+                                            <select class="form-control" id="city-name" name="cityname"
+                                                [(ngModel)]="editModel.cityname" #cityname="ngModel">
+                                                <option *ngFor="let city of citesNames" value="{{h.cityname}}">{{city}}
+                                                </option>
+
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="price" class="col-form-label">Price Per Day:</label>
+                                            <input type="text" class="form-control" id="price" name="pricePerDay"
+                                                [(ngModel)]="editModel.pricePerDay" #pricePerDay="ngModel" value="shymaa">
+
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="images" class="col-form-label">images:</label>
+                                            <input type="file" multiple id="images" name="images"
+                                                (change)="onImageSelected($event)" [(ngModel)]="editModel.images"
+                                                #images="ngModel">
+
+                                        </div>
+                                        <div class="modal-footer">
+
+                                            <button class="btn add-btn text-white" >Add</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </td>
+
+                <td (click)="deletehotel(i)">
                     <i class="fa-regular fa-trash-can fa-lg fs-3" style="color:#044669;"></i>
-                 </td>
-              
+                </td>
+
             </tr>
         </tbody>
-    
+
     </table>
-    <div class="d-flex justify-content-end me-5 mt-5" >
-        <button type="button" class="btn add-btn text-white" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Add New Hotel</button>
+    <div class="d-flex justify-content-end me-5 mt-5">
+        <button type="button" class="btn add-btn text-white" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            data-bs-whatever="@mdo">Add New Hotel</button>
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Add City</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form #addhotel="ngForm" (ngSubmit)="submitForm(addhotel)">
-              <div class="mb-3">
-                <label for="hotel-name" class="col-form-label">Hotel Name:</label>
-                <input type="text" class="form-control" id="hotel-name" name="Name" [(ngModel)]="model.Name" #Name="ngModel">
-              </div>
-              <div class="mb-3">
-                <label for="city-name" class="col-form-label">City Name:</label>
-                <input type="text" class="form-control" id="city-name" name="cityname" [(ngModel)]="model.cityname" #cityname="ngModel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Hotel</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form #addhotel="ngForm" (ngSubmit)="submitForm(addhotel)">
+                        <div class="mb-3">
+                            <label for="hotel-name" class="col-form-label">Hotel Name:</label>
+                            <input type="text" class="form-control" id="hotel-name" name="Name" [(ngModel)]="model.Name"
+                                #Name="ngModel">
+                        </div>
+                        <div class="mb-3">
+                            <label for="city-name" class="col-form-label">City Name:</label>
 
-              </div>
-              <div class="mb-3">
-                <label for="price" class="col-form-label">Price Per Day:</label>
-                <input type="text" class="form-control" id="price" name="pricePerDay" [(ngModel)]="model.pricePerDay" #pricePerDay="ngModel">
 
-              </div>
-              <div class="mb-3">
-                <label for="images" class="col-form-label">images:</label>
-                <input type="file" multiple  id="images" name="images" (change)="onImageSelected($event)" [(ngModel)]="model.images" #images="ngModel">
+                            <select class="form-control" id="city-name" name="cityname" [(ngModel)]="model.cityname"
+                                #cityname="ngModel">
+                                <option *ngFor="let city of citesNames" value="{{city}}">{{city}}</option>
 
-              </div>
-              <div class="modal-footer">
-              
-                <button  class="btn add-btn text-white">Add</button>
-              </div>
-            </form>
-          </div>
-       
+                            </select>
+
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="col-form-label">Price Per Day:</label>
+                            <input type="text" class="form-control" id="price" name="pricePerDay"
+                                [(ngModel)]="model.pricePerDay" #pricePerDay="ngModel">
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="images" class="col-form-label">images:</label>
+                            <input type="file" multiple id="images" name="images" (change)="onImageSelected($event)"
+                                [(ngModel)]="model.images" #images="ngModel">
+
+                        </div>
+                        <div class="modal-footer">
+
+                            <button class="btn add-btn text-white">Add</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
         </div>
-      </div>
     </div>
 
 </div>
-

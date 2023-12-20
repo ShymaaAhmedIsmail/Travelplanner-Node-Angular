@@ -11,6 +11,8 @@ router.post("/addtravel",authUser,authAdmin , travelController.addtravel)
 router.post("/addtrip/:id",authUser,authAdmin , travelController.addtrip)
 router.get("/alltripsIntravel/:id", travelController.getalltrips)
 router.get("/getalltravels", travelController.getalltravels)
+router.get("/gettravelById/:id", travelController.gettravelById)
+
 router.delete("/deleteTravel/:id", travelController.deleteTravel)
 router.delete("/deleteTripfromtravel/:id/:tripid",authUser,authAdmin , travelController.deleteTripfromTravel)
 
